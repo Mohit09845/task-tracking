@@ -28,7 +28,6 @@ public class DataService {
     public void saveToFile() {
         try {
             File file = new File(FILE_PATH);
-            System.out.println(FILE_PATH);
             file.getParentFile().mkdirs();
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
