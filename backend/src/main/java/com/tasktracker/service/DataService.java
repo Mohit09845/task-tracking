@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataService {
-
     private DataStore dataStore;
 
     public DataService() {
@@ -29,6 +28,7 @@ public class DataService {
     public void saveToFile() {
         try {
             File file = new File(FILE_PATH);
+            System.out.println(FILE_PATH);
             file.getParentFile().mkdirs();
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -45,22 +45,19 @@ public class DataService {
     private void loadData() {
         try {
             File file = new File(FILE_PATH);
-
             Gson gson = new Gson();
-            InputStreamReader reader;
 
             if (file.exists()) {
-                reader = new InputStreamReader(new FileInputStream(file));
+                try (InputStreamReader reader = new InputStreamReader(new FileInputStream(file))) {
+                    dataStore = gson.fromJson(reader, DataStore.class);
+                }
             } else {
-                reader = new InputStreamReader(
-                        getClass().getClassLoader().getResourceAsStream("prjdata.json")
-                );
+                dataStore = new DataStore();
             }
-
-            dataStore = gson.fromJson(reader, DataStore.class);
 
         } catch (Exception e) {
             e.printStackTrace();
+            dataStore = new DataStore();
         }
     }
 
