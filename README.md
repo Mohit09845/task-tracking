@@ -12,6 +12,11 @@ Data is stored in a JSON file inside the Tomcat runtime directory.
 
 ---
 
+## Commands to run project
+mvn clean package
+Copy WAR to Tomcat webapps folder
+startup.bat
+
 ## Path Where Your File Will Be Stored (SmartTomcat)
 C:\Users\<your-username\.SmartTomcat\backend\backend\data\prjdata.json
 
